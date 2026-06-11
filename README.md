@@ -11,6 +11,10 @@ docker compose up --build -d
 
 Открыть: [http://localhost:8083](http://localhost:8083)
 
+## Интерфейс
+
+![Calendar weekly view](docs/calendar-view.png)
+
 Первый вход без SSO:
 
 ```env
