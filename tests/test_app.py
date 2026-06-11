@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 from datetime import date
+from pathlib import Path
 
 import httpx
 from fastapi.testclient import TestClient
@@ -156,6 +157,16 @@ def test_settings_accept_database_url_aliases(tmp_path, monkeypatch):
     settings = Settings.from_environment(env_file)
 
     assert settings.database_url == "postgresql://u:p@db:5432/app"
+
+
+def test_env_example_allows_bootstrap_password_login(monkeypatch):
+    for key in ["SSO_ENABLED", "PASSWORD_LOGIN_ENABLED"]:
+        monkeypatch.delenv(key, raising=False)
+
+    settings = Settings.from_environment(Path(__file__).resolve().parents[1] / ".env.example")
+
+    assert settings.sso_enabled is False
+    assert settings.password_login_enabled is True
 
 
 def test_date_chunks_respect_seven_calendar_days():

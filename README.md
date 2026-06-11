@@ -13,6 +13,22 @@ docker compose up --build -d
 
 Открыть: [http://localhost:8083](http://localhost:8083)
 
+Первый вход без SSO:
+
+```env
+APP_USERNAME=admin
+APP_PASSWORD=change-me
+PASSWORD_LOGIN_ENABLED=true
+SSO_ENABLED=false
+```
+
+После входа откройте `/admin` и настройте allow list. Перед продуктивным запуском смените `APP_PASSWORD` или включите SSO и отключите парольный вход:
+
+```env
+SSO_ENABLED=true
+PASSWORD_LOGIN_ENABLED=false
+```
+
 SSO-пользователи должны быть добавлены в allow list на странице `/admin`. Парольный вход через `APP_USERNAME` / `APP_PASSWORD` по умолчанию включен только без SSO. При `SSO_ENABLED=true` он выключен, если явно не задано `PASSWORD_LOGIN_ENABLED=true`.
 
 Закрытые маршруты:
