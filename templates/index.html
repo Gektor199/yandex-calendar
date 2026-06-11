@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="calendar-app">
+  <aside class="calendar-sidebar">
+    <div class="sidebar-head">
+      <h1>Календарь</h1>
+      <span class="sidebar-user">{{ username }}</span>
+    </div>
+    {% if is_admin %}
+    <a class="secondary-link" href="/admin">Админка</a>
+    {% endif %}
+
+    <form id="calendar-form" class="sidebar-section">
+      <label class="field email-field">
+        <span class="field-label">Календари коллег</span>
+        <span class="employee-add">
+          <input id="employee-email" type="email" placeholder="name@example.com" autocomplete="email" />
+          <button id="add-employee" class="icon-button add-person-button" type="button" aria-label="Добавить сотрудника">+</button>
+        </span>
+      </label>
+      <div id="employee-list" class="employee-list" aria-label="Выбранные сотрудники"></div>
+      <button id="show-button" class="primary-button" type="submit">Показать</button>
+    </form>
+
+    <section class="sidebar-section">
+      <p class="field-label">Настройки</p>
+      <label class="field">
+        <span class="field-copy">Неделя</span>
+        <input id="week-start" type="date" value="{{ week_start }}" required />
+      </label>
+      <input id="time-zone" type="hidden" value="{{ default_time_zone }}" />
+      <div id="mini-calendar" class="mini-calendar"></div>
+    </section>
+
+    <a class="secondary-link sidebar-logout" href="/logout">Выйти</a>
+  </aside>
+
+  <section class="calendar-main">
+    <header class="calendar-topbar">
+      <div>
+        <h2 id="month-label">Июнь 2026</h2>
+        <p id="event-count">Добавьте email сотрудника</p>
+      </div>
+      <div class="week-controls">
+        <button id="refresh-calendar" class="icon-button refresh-button" type="button" aria-label="Обновить календари" title="Обновить календари">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"></path>
+          </svg>
+        </button>
+        <button id="prev-week" class="icon-button" type="button" aria-label="Предыдущая неделя">‹</button>
+        <button id="next-week" class="icon-button" type="button" aria-label="Следующая неделя">›</button>
+        <span id="week-label" class="view-chip">Неделя</span>
+      </div>
+    </header>
+
+    <section class="calendar-wrap">
+      <div id="calendar-grid" class="calendar-grid"></div>
+    </section>
+  </section>
+</main>
+<script src="/static/app.js" defer></script>
+{% endblock %}

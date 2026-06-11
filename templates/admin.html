@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="shell shell-admin">
+  <section class="hero">
+    <p class="eyebrow">Yandex 360</p>
+    <h1>Администрирование доступа.</h1>
+    <p class="hero-copy">Allow list пользователей и доступные им календари сотрудников.</p>
+    <div class="hero-actions">
+      <a class="secondary-link" href="/">Календарь</a>
+      <a class="secondary-link" href="/logout">Выйти</a>
+    </div>
+  </section>
+
+  <section class="panel panel-catalog">
+    <div class="panel-head">
+      <div>
+        <p class="caption">Allow list</p>
+        <h2>Пользователи системы</h2>
+        <p class="panel-subtitle">Учетка должна совпадать с логином, который возвращает SSO.</p>
+      </div>
+    </div>
+
+    <form id="access-form" class="admin-add-form">
+      <input id="access-email" type="text" placeholder="domain.user" maxlength="320" autocomplete="username" required />
+      <select id="access-role" required>
+        <option value="user">Пользователь</option>
+        <option value="admin">Админ</option>
+      </select>
+      <label class="checkbox-field">
+        <input id="access-allow-all" type="checkbox" />
+        <span>Доступ ко всем</span>
+      </label>
+      <textarea id="access-calendars" rows="3" placeholder="Календари через запятую или с новой строки"></textarea>
+      <button type="submit" class="secondary-button">Добавить</button>
+    </form>
+
+    <div id="access-empty" class="empty-state">Пользователей с доступом пока нет.</div>
+    <div id="access-list" class="access-list"></div>
+  </section>
+</main>
+<script src="/static/admin.js" defer></script>
+{% endblock %}

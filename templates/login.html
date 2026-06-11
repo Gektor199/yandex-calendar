@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="shell shell-login">
+  <section class="hero">
+    <p class="eyebrow">Yandex 360</p>
+    <h1>Календарь сотрудника.</h1>
+    <p class="hero-copy">Локальный просмотр событий Яндекс Календаря с ограничением доступа по allow list.</p>
+  </section>
+  <section class="panel panel-form">
+    <div class="panel-head">
+      <div>
+        <p class="caption">Доступ</p>
+        <h2>Доступ</h2>
+      </div>
+    </div>
+    {% if sso_enabled %}
+    <a class="primary-link sso-link" href="/sso/login">Войти через {{ sso_provider_name }}</a>
+    {% if password_login_enabled %}
+    <div class="login-divider">или</div>
+    {% endif %}
+    {% endif %}
+    {% if error %}
+    <div class="alert-card">{{ error }}</div>
+    {% endif %}
+    {% if password_login_enabled %}
+    <form class="form-grid" method="post" action="/login">
+      <label class="field">
+        <span class="field-label">Логин</span>
+        <input name="username" type="text" autocomplete="username" required />
+      </label>
+      <label class="field">
+        <span class="field-label">Пароль</span>
+        <input name="password" type="password" autocomplete="current-password" required />
+      </label>
+      <button class="primary-button" type="submit">Войти</button>
+    </form>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}
