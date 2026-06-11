@@ -64,3 +64,4 @@ docker compose down
 - `DELETE /api/admin/access-users/{id}`
 
 К Yandex Calendar API сервис обращается через `/v1/calendar/events` с параметрами `from` и `to` в формате ISO 8601 `YYYY-MM-DDTHH:MM:SSZ`.
+Если у вас нет доступа в API календаря - обратитесь в поддержку яндекс 360 для бизнеса. 
